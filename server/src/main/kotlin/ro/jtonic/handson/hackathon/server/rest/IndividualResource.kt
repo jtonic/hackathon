@@ -3,6 +3,7 @@ package ro.jtonic.handson.hackathon.server.rest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
+import ro.jtonic.handson.hackathon.persistence.model.Individual
 import ro.jtonic.handson.hackathon.persistence.repositories.IndividualRepository
 
 /**
@@ -16,6 +17,8 @@ open class IndividualResource {
     @Autowired lateinit var individualRepo: IndividualRepository
 
     @GetMapping("/")
-    fun getIndividual() = individualRepo.findAll()
+    fun getIndividual(): List<Individual> {
+        return individualRepo.findAll()
+    }
 
 }
