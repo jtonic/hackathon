@@ -9,7 +9,12 @@ dependencies {
     compile         libraries.spring_web
     compile         libraries.spring_actuator
     testCompile     libraries.spring_test
-    compileOnly     libraries.lombok
+
+//    optional "org.springframework.boot:spring-boot-configuration-processor"
+//    kapt "org.springframework.boot:spring-boot-configuration-processor"
 
     compile project(':commons')
+    compile project(':persistence')
 }
+
+compileJava.dependsOn(processResources)

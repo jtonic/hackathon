@@ -1,1 +1,7 @@
+apply plugin: 'org.springframework.boot'
 
+dependencies {
+    compile     libraries.spring_data_jpa
+    compile     libraries.mysql_jdbc
+    compile     'org.hibernate:hibernate-entitymanager:5.2.8.Final'
+}

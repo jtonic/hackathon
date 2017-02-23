@@ -1,8 +1,20 @@
 spring:
-  name: Hackathon
+  application:
+    name:                       Hackathon
+
+  datasource:
+    driver-class-name:          com.mysql.jdbc.Driver
+    url:                        jdbc:mysql://127.0.0.1:3306/db
+    username:                   root
+    password:                   root
+
+  jpa:
+    properties:
+      hibernate:
+        dialect:                org.hibernate.dialect.MySQLDialect
+    show-sql:                   false
 
 app:
-  developer:
-    first-name: Antonel-Ernest
-    last-name: Pazargic
+  first-name: Antonel-Ernest
+  last-name: Pazargic
 

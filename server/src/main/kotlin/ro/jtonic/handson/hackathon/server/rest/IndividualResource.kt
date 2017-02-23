@@ -1,9 +1,9 @@
 package ro.jtonic.handson.hackathon.server.rest
 
-import org.springframework.beans.factory.annotation.Value
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
-import ro.jtonic.handson.hackathon.commons.Individual
+import ro.jtonic.handson.hackathon.persistence.repositories.IndividualRepository
 
 /**
  * Created by Antonel Ernest Pazargic on 23/02/2017.
@@ -13,10 +13,9 @@ import ro.jtonic.handson.hackathon.commons.Individual
 @RestController
 open class IndividualResource {
 
-    @Value("\${app.developer.first-name}") lateinit var firstName: String
-    @Value("\${app.developer.last-name}") lateinit var lastName: String
+    @Autowired lateinit var individualRepo: IndividualRepository
 
     @GetMapping("/")
-    fun getIndividual() = Individual(firstName, lastName, 47, true)
+    fun getIndividual() = individualRepo.findAll()
 
 }
