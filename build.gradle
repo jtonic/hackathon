@@ -1,0 +1,84 @@
+buildscript {
+    ext {
+        kotlinVersion = '1.0.6'
+        springBootVersion = '1.5.1.RELEASE'
+        springLoadedVersion = "1.2.6.RELEASE"
+    }
+    repositories {
+        mavenCentral()
+        mavenLocal()
+        jcenter()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath "org.springframework:springloaded:${springLoadedVersion}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
+        classpath 'com.bluepapa32:gradle-watch-plugin:0.1.5'
+    }
+
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'kotlin'
+    apply plugin: 'com.bluepapa32.watch'
+    apply plugin: 'idea'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    dependencies {
+        compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
+    }
+
+    compileJava {
+        //enable compilation in a separate daemon process
+        options.fork = true
+        //enable incremental compilation
+        options.incremental = true
+    }
+
+    idea {
+        module {
+            inheritOutputDirs = false
+            outputDir = file("$buildDir/classes/main/")
+        }
+    }
+
+    watch {
+        java {
+            files files('src/main/java')
+            tasks 'compileJava'
+        }
+    }
+}
+
+ext.libraries = [
+        spring_web             : 'org.springframework.boot:spring-boot-starter-web',
+        spring_config_processor: 'org.springframework.boot:spring-boot-configuration-processor',
+        spring_data_jpa        : 'org.springframework.boot:spring-boot-starter-data-jpa',
+        spring_data_rest       : 'org.springframework.boot:spring-boot-starter-data-rest',
+        spring_hal_browser     : 'org.springframework.data:spring-data-rest-hal-browser',
+        spring_hateoas         : 'org.springframework.boot:spring-boot-starter-hateoas',
+        spring_actuator        : 'org.springframework.boot:spring-boot-starter-actuator',
+
+        spring_test            : 'org.springframework.boot:spring-boot-starter-test',
+
+        liquibase              : 'org.liquibase:liquibase-core',
+        mysql_jdbc             : 'mysql:mysql-connector-java',
+        lombok                 : 'org.projectlombok:lombok',
+]
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.4'
+}
+

@@ -1,0 +1,15 @@
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'hackathon'
+    version = '0.0.1-SNAPSHOT'
+}
+
+dependencies {
+    compile         libraries.spring_web
+    compile         libraries.spring_actuator
+    testCompile     libraries.spring_test
+    compileOnly     libraries.lombok
+
+    compile project(':commons')
+}
