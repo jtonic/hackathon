@@ -15,6 +15,6 @@ spring:
     show-sql:                   false
 
 app:
-  first-name: Antonel-Ernest
+  first-name: Antonel
   last-name: Pazargic
 

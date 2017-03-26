@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 import ro.jtonic.handson.hackathon.persistence.model.Individual
 import ro.jtonic.handson.hackathon.persistence.repositories.IndividualRepository
+import ro.jtonic.handson.hackathon.server.ApplicationProps
 
 /**
  * Created by Antonel Ernest Pazargic on 23/02/2017.
@@ -12,12 +13,13 @@ import ro.jtonic.handson.hackathon.persistence.repositories.IndividualRepository
  */
 
 @RestController
-open class IndividualResource {
-
-    @Autowired lateinit var individualRepo: IndividualRepository
+class IndividualResource @Autowired constructor(
+        var appProps: ApplicationProps,
+        var individualRepo: IndividualRepository) {
 
     @GetMapping("/")
     fun getIndividual(): List<Individual> {
+        println("The user ${appProps.firstName} - ${appProps.lastName} is searching for all individuals")
         return individualRepo.findAll()
     }
 

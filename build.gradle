@@ -1,7 +1,9 @@
 buildscript {
     ext {
-        kotlinVersion = '1.0.6'
+        kotlinVersion = '1.1.1'
         springBootVersion = '1.5.1.RELEASE'
+        springLoadedVersion = "1.2.6.RELEASE"
+        propDepsVersion = '0.0.7'
     }
     repositories {
         mavenCentral()
@@ -11,14 +13,25 @@ buildscript {
     }
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
+        classpath "org.springframework:springloaded:$springLoadedVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath 'com.bluepapa32:gradle-watch-plugin:0.1.5'
+        classpath "org.springframework.build.gradle:propdeps-plugin:$propDepsVersion"
+        classpath "org.jetbrains.kotlin:kotlin-noarg:$kotlinVersion"
+        classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion"
     }
 
 }
 
 subprojects {
     apply plugin: 'java'
+    apply plugin: 'propdeps'
+    apply plugin: 'propdeps-maven'
+    apply plugin: 'propdeps-idea'
     apply plugin: 'kotlin'
+    apply plugin: 'kotlin-spring'
+    apply plugin: "kotlin-jpa"
+    apply plugin: 'kotlin-kapt'
     apply plugin: 'idea'
 
     def javaVersion = 1.8
@@ -64,6 +77,8 @@ ext.libraries = [
         spring_actuator        : 'org.springframework.boot:spring-boot-starter-actuator',
 
         spring_test            : 'org.springframework.boot:spring-boot-starter-test',
+
+        lombok                 : 'org.projectlombok:lombok:1.16.16',
 
         liquibase              : 'org.liquibase:liquibase-core',
         mysql_jdbc             : 'mysql:mysql-connector-java',

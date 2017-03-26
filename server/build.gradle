@@ -1,4 +1,5 @@
 apply plugin: 'org.springframework.boot'
+apply plugin: 'kotlin-allopen'
 
 jar {
     baseName = 'hackathon'
@@ -8,10 +9,14 @@ jar {
 dependencies {
     compile         libraries.spring_web
     compile         libraries.spring_actuator
+    compile         libraries.mysql_jdbc
+    compile         libraries.lombok
     testCompile     libraries.spring_test
 
-//    optional "org.springframework.boot:spring-boot-configuration-processor"
-//    kapt "org.springframework.boot:spring-boot-configuration-processor"
+    kapt "org.springframework.boot:spring-boot-configuration-processor"
+    optional "org.springframework.boot:spring-boot-configuration-processor"
+    testCompile 'io.kotlintest:kotlintest:1.3.7'
+    testCompile 'org.jetbrains.kotlin:kotlin-reflect:1.1.1'
 
     compile project(':commons')
     compile project(':persistence')
