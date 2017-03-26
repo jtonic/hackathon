@@ -14,4 +14,4 @@ import org.springframework.transaction.annotation.EnableTransactionManagement
 @EnableTransactionManagement
 @EntityScan("ro.jtonic.handson.hackathon.persistence.model")
 @Configuration
-open class PersistenceConfig
+class PersistenceConfig

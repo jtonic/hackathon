@@ -15,6 +15,4 @@ class Individual (
         var id: Long? = null,
         var firstName: String = "",
         var lastName: String = ""
-) {
-        constructor(firstName: String, lastName: String): this(null, firstName, lastName)
-}
+)
